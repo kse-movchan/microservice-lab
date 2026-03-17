@@ -30,12 +30,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
       - name: Run Secret Detection
-      run:
-        docker run --rm \
-          -v "${{ github.workspace }}":/scan \
-          ghcr.io/${{ github.repository_owner }}/custom-secret-detect:latest \
-          /scan/
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}":/scan \
+            ghcr.io/${{ github.repository_owner }}/custom-secret-detect:latest \
+            /scan/
   
   docker-build-push:
     needs: [build-and-test, secret-scan]
