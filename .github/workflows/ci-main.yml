@@ -62,12 +62,12 @@ jobs:
 
       - name: Upload SBOM to Dependency-Track
         run: |
-          curl.exe -sf -X POST "${{ vars.DTRACK_URL }}/api/v1/bom" \
-            -H "X-Api-Key: ${{ secrets.DTRACK_API_KEY }}" \
-            -H "Content-Type: multipart/form-data" \
-            -F "projectName=my-app" \
-            -F "projectVersion=${{ github.sha }}" \
-            -F "autoCreate=true" \
+          curl.exe -sf -X POST "${{ vars.DTRACK_URL }}/api/v1/bom" `
+            -H "X-Api-Key: ${{ secrets.DTRACK_API_KEY }}" `
+            -H "Content-Type: multipart/form-data" `
+            -F "projectName=my-app" `
+            -F "projectVersion=${{ github.sha }}" `
+            -F "autoCreate=true" `
             -F "bom=@sbom.cdx.json"
 
       - name: Run Trivy container scan
